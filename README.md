@@ -16,8 +16,16 @@ command line. The following features are currently supported:
 
 ### 2. How to build
 
+Fetch all dependencies:
 ```
-$ go build
+$ go get
+```
+
+Build from source:
+```
+$ go build                          # build for your own system/OS
+$ GOOS=linux GOARCH=amd64 go build  # build for Linux/amd64
+$ GOOS=darwin GOARCH=amd64 go build # build for Mac OS X
 ```
 
 ### 3. How to use
