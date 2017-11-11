@@ -12,10 +12,6 @@ var commands = []prompt.Suggest {
     { Text: "exit", Description: "Exit application" },
 }
 
-func authCompleter(d prompt.Document) []prompt.Suggest {
-    return []prompt.Suggest {}
-}
-
 func mainCompleter(d prompt.Document) []prompt.Suggest {
     args := strings.Split(d.TextBeforeCursor(), " ")
     return argumentsCompleter(args)
