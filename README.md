@@ -14,6 +14,16 @@ command line. The following features are currently supported:
 - Set zone temperatures, either based on end time, or continuously.
 - Cancel zone temperature overrides.
 
+The following screenshots demonstrate some of this functionality.
+
+#### List all zones
+
+![evohome-cli show zones](https://github.com/rickhofstede/assets/raw/master/evohome-cli/evohome-cli_show_zones.png "evohome-cli: show zones")
+
+#### Cancel zone temperature override
+
+![evohome-cli cancel zone temperature override](https://github.com/rickhofstede/assets/raw/master/evohome-cli/evohome-cli_cancel_temp_override.png "evohome-cli: cancel zone temperature override")
+
 ### 2. How to build
 
 Fetch all dependencies:
