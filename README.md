@@ -57,6 +57,8 @@ Here are some examples of currently supports commands per command keyword:
 - `cancel`:
     - `cancel zone Bathroom temperature override`: Cancel the temperature override of the "Bathroom" zone.
 
+Auto-completion (using tab) can be used for discovering and auto-completing commands.
+
 ### 4. Support
 
 Please request support by creating an 'issue' [here](https://github.com/rickhofstede/evohome-cli/issues).
