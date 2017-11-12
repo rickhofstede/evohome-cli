@@ -10,7 +10,7 @@ license. For more information, see LICENSE.
 This library can be used for controlling Evohome systems from the
 command line. The following features are currently supported:
 
-- List all zones, including their current temperature and the target temperature.
+- List all zones, including their current temperature, target temperature and schedules.
 - Set zone temperatures, either based on end time, or continuously.
 - Cancel zone temperature overrides.
 
@@ -51,6 +51,7 @@ Here are some examples of currently supports commands per command keyword:
 - `show`:
     - `show zones`: List all zones, including their current temperature and the target temperature.
     - `show zone Bathroom`: Show details of the "Bathroom" zone.
+    - `show zone Bathroom schedule`: Show schedule of the "Bathroom" zone.
 - `set`:
     - `set zone Bathroom temperature 19.5`: Set the temperature of the "Bathroom" zone to 19.5 degrees.
     - `set zone Bathroom temperature 19.5 until 2017/11/05 17:30`: Set the temperature of the "Bathroom" zone to 19.5 degrees until November 5, 2017, 17:30 (local time).

@@ -121,6 +121,17 @@ func argumentsCompleter(args []string) []prompt.Suggest {
                         return prompt.FilterHasPrefix(subCommands, third, true)
                 }
             }
+
+            if len(args) == 4 {
+                fourth := args[3]
+                switch second {
+                    case "zone":
+                        subCommands := []prompt.Suggest {
+                            { Text: "schedule", Description: "Show zone schedule" },
+                        }
+                        return prompt.FilterHasPrefix(subCommands, fourth, true)
+                }
+            }
     }
 
     return []prompt.Suggest {}

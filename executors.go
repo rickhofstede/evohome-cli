@@ -129,23 +129,43 @@ func mainExecutor(s string) {
                     return
                 }
 
-                fmt.Printf("%-20s %s\n", "Name:", zone.Name)
-                fmt.Printf("%-20s %s\n", "Zone type:", zone.ZoneType)
-                fmt.Printf("%-20s %s\n", "Model type:", zone.ModelType)
-                if zone.TemperatureStatus.IsAvailable {
-                    fmt.Printf("%-20s %.1f\n", "Temperature:", zone.TemperatureStatus.Temperature)
-                }
+                if strings.Contains(s, "schedule") {
+                    output := []string {
+                        "Day of week | Time | Temperature",
+                        "---- | ---- | ----",
+                    }
+                    for _, schedule := range zone.Schedules.DailySchedules {
+                        for i, switchPoint := range schedule.SwitchPoints {
+                            var day string
+                            if i == 0 {
+                                day = schedule.DayOfWeek
+                            } else {
+                                day = ""
+                            }
+                            output = append(output, fmt.Sprintf("%s|%s|%.1f",
+                                    day, switchPoint.Time, switchPoint.Temperature))
+                        }
+                    }
+                    fmt.Println(columnize.SimpleFormat(output))
+                } else {
+                    fmt.Printf("%-20s %s\n", "Name:", zone.Name)
+                    fmt.Printf("%-20s %s\n", "Zone type:", zone.ZoneType)
+                    fmt.Printf("%-20s %s\n", "Model type:", zone.ModelType)
+                    if zone.TemperatureStatus.IsAvailable {
+                        fmt.Printf("%-20s %.1f\n", "Temperature:", zone.TemperatureStatus.Temperature)
+                    }
 
-                var override string
-                if zone.HeatSetPointStatus.SetPointMode == "PermanentOverride" {
-                    override = "(permanent override)"
-                } else if zone.HeatSetPointStatus.SetPointMode == "TemporaryOverride" {
-                    override = "(temporary override)"
-                }
+                    var override string
+                    if zone.HeatSetPointStatus.SetPointMode == "PermanentOverride" {
+                        override = "(permanent override)"
+                    } else if zone.HeatSetPointStatus.SetPointMode == "TemporaryOverride" {
+                        override = "(temporary override)"
+                    }
 
-                fmt.Printf("%-20s %.1f %s\n", "Target temperature:",
-                        zone.HeatSetPointStatus.TargetTemperature,
-                        override)
+                    fmt.Printf("%-20s %.1f %s\n", "Target temperature:",
+                            zone.HeatSetPointStatus.TargetTemperature,
+                            override)
+                }
             } else if second == "zones" {
                 output := []string {
                     "Name | Type | Temperature",
