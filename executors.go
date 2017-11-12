@@ -38,6 +38,10 @@ func mainExecutor(s string) {
 
             re := regexp.MustCompile(`(?i)^cancel zone (?P<zone>[a-z\d]+) (?P<action>[a-z]+) (?P<attribute>[a-z]+)$`)
             matches := RegexSubMatchMap(re, s)
+            if len(matches) == 0 {
+                error("Invalid command")
+                return
+            }
 
             zone := t.Zone(matches["zone"])
             if zone == nil {
@@ -67,6 +71,10 @@ func mainExecutor(s string) {
 
             re := regexp.MustCompile(`(?i)^set zone (?P<zone>[a-z\d]+) (?P<action>[a-z]+) (?P<value>\d+(\.[\d]+)?)(\suntil (?P<time>.+))?$`)
             matches := RegexSubMatchMap(re, s)
+            if len(matches) == 0 {
+                error("Invalid command")
+                return
+            }
 
             zone := t.Zone(matches["zone"])
             if zone == nil {
