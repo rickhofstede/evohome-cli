@@ -38,8 +38,8 @@ func argumentsCompleter(args []string) []prompt.Suggest {
                 return prompt.FilterHasPrefix(subCommands, second, true)
             }
 
-            third := args[2]
             if len(args) == 3 {
+                third := args[2]
                 var subCommands []prompt.Suggest
                 switch second {
                     case "zone":
@@ -48,16 +48,16 @@ func argumentsCompleter(args []string) []prompt.Suggest {
                 return prompt.FilterHasPrefix(subCommands, third, true)
             }
 
-            fourth := args[3]
             if len(args) == 4 {
+                fourth := args[3]
                 subCommands := []prompt.Suggest {
                     { Text: "temperature", Description: "Cancel zone temperature configuration" },
                 }
                 return prompt.FilterHasPrefix(subCommands, fourth, true)
             }
 
-            fifth := args[4]
             if len(args) == 5 {
+                fifth := args[4]
                 subCommands := []prompt.Suggest {
                     { Text: "override", Description: "Cancel zone temperature override" },
                 }
@@ -71,8 +71,8 @@ func argumentsCompleter(args []string) []prompt.Suggest {
                 return prompt.FilterHasPrefix(subCommands, second, true)
             }
 
-            third := args[2]
             if len(args) == 3 {
+                third := args[2]
                 var subCommands []prompt.Suggest
                 switch second {
                     case "zone":
@@ -81,8 +81,8 @@ func argumentsCompleter(args []string) []prompt.Suggest {
                 return prompt.FilterHasPrefix(subCommands, third, true)
             }
 
-            fourth := args[3]
             if len(args) == 4 {
+                fourth := args[3]
                 subCommands := []prompt.Suggest {
                     { Text: "temperature", Description: "Change zone temperature" },
                 }
@@ -113,8 +113,8 @@ func argumentsCompleter(args []string) []prompt.Suggest {
                 return prompt.FilterHasPrefix(subCommands, second, true)
             }
 
-            third := args[2]
             if len(args) == 3 {
+                third := args[2]
                 switch second {
                     case "zone":
                         subCommands := listToSubCommands(t.ZoneNames())
