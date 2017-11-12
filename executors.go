@@ -116,10 +116,16 @@ func mainExecutor(s string) {
                     return
                 }
 
-                third := splitCmd[2] // zone name
-                zone := t.Zone(third)
+                re := regexp.MustCompile(`(?i)^show zone (?P<zone>[a-z\d]+)(\sschedule)?$`)
+                matches := RegexSubMatchMap(re, s)
+                if len(matches) == 0 {
+                    error("Invalid command")
+                    return
+                }
+
+                zone := t.Zone(matches["zone"])
                 if zone == nil {
-                    error("Invalid zone '" + splitCmd[2] + "'")
+                    error("Invalid zone '" + matches["zone"] + "'")
                     return
                 }
 
