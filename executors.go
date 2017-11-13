@@ -11,7 +11,7 @@ import (
     "github.com/ryanuber/columnize"
 )
 
-func mainExecutor(s string) {
+func executor(s string) {
     s = strings.TrimSpace(s)
     if s == "" {
         return

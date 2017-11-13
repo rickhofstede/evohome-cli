@@ -12,7 +12,7 @@ var commands = []prompt.Suggest {
     { Text: "exit", Description: "Exit application" },
 }
 
-func mainCompleter(d prompt.Document) []prompt.Suggest {
+func completer(d prompt.Document) []prompt.Suggest {
     args := strings.Split(d.TextBeforeCursor(), " ")
     return argumentsCompleter(args)
 }

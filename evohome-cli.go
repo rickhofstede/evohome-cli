@@ -33,8 +33,8 @@ func main() {
 
     // Show main shell
     p := prompt.New(
-        mainExecutor,
-        mainCompleter,
+        executor,
+        completer,
         prompt.OptionPrefix(">>> "),
         prompt.OptionTitle("Evohome CLI"),
     )
