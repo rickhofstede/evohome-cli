@@ -1,6 +1,7 @@
 package main
 
 import (
+    "evohome"
     "strings"
     "github.com/c-bata/go-prompt"
 )
@@ -14,19 +15,21 @@ var commands = []prompt.Suggest {
 
 func completer(d prompt.Document) ([]prompt.Suggest) {
     args := strings.Split(d.TextBeforeCursor(), " ")
-    return argumentsCompleter(args)
-}
-
-func argumentsCompleter(args []string) ([]prompt.Suggest) {
-    if len(args) <= 1 {
-        return prompt.FilterHasPrefix(commands, args[0], true)
-    }
 
     if !clientInitialized() {
         error("Evohome client not initialized")
         return []prompt.Suggest {}
     }
+
     t := client.TemperatureControlSystem()
+    return argumentsCompleter(args, &t)
+}
+
+func argumentsCompleter(args []string, t evohome.ControlSystem) ([]prompt.Suggest) {
+    if len(args) <= 1 {
+        return prompt.FilterHasPrefix(commands, args[0], true)
+    }
+
     first := args[0]
     second := args[1]
     switch first {
