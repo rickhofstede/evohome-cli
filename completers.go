@@ -12,12 +12,12 @@ var commands = []prompt.Suggest {
     { Text: "exit", Description: "Exit application" },
 }
 
-func completer(d prompt.Document) []prompt.Suggest {
+func completer(d prompt.Document) ([]prompt.Suggest) {
     args := strings.Split(d.TextBeforeCursor(), " ")
     return argumentsCompleter(args)
 }
 
-func argumentsCompleter(args []string) []prompt.Suggest {
+func argumentsCompleter(args []string) ([]prompt.Suggest) {
     if len(args) <= 1 {
         return prompt.FilterHasPrefix(commands, args[0], true)
     }

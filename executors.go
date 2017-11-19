@@ -94,7 +94,7 @@ func executor(s string) {
             }
 
             if matches["time"] == "" {
-                err := zone.SetTemperature(float32(temperature), time.Time{})
+                err := zone.SetTemperature(float32(temperature), time.Time {})
                 if err != nil {
                     error("An error occurred while configuring temperature for zone '" + zone.Name + "'")
                 }
