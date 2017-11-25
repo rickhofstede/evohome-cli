@@ -1,6 +1,7 @@
 package main
 
 import (
+    "evohome"
     "fmt"
     "os"
     "regexp"
@@ -12,6 +13,16 @@ import (
 )
 
 func executor(s string) {
+    if !clientInitialized() {
+        error("Evohome client not initialized")
+        return
+    }
+
+    t := client.TemperatureControlSystem()
+    realExecutor(s, &t)
+}
+
+func realExecutor(s string, t evohome.ControlSystem) {
     s = strings.TrimSpace(s)
     if s == "" {
         return
@@ -20,12 +31,6 @@ func executor(s string) {
         os.Exit(0)
         return
     }
-
-    if !clientInitialized() {
-        error("Evohome client not initialized")
-    }
-
-    t := client.TemperatureControlSystem()
 
     splitCmd := strings.Split(s, " ")
     first := splitCmd[0]
@@ -179,7 +184,11 @@ func executor(s string) {
                     "Name | Type | Temperature",
                     "---- | ---- | ----",
                 }
-                for _, zone := range t.Zones {
+
+                // Don't loop over t.ZonesMap() right-away to retain zone order
+                zones := t.ZonesMap()
+                for _, name := range t.ZoneNames() {
+                    zone := zones[name]
                     temperature := "-"
                     if zone.TemperatureStatus.IsAvailable {
                         temperature = fmt.Sprintf("%.1f", zone.TemperatureStatus.Temperature)
@@ -188,10 +197,10 @@ func executor(s string) {
                     targetTemperature := fmt.Sprintf("%.1f", zone.HeatSetPointStatus.TargetTemperature)
                     if temperature != targetTemperature {
                         output = append(output, fmt.Sprintf("%s|%s|%s* (%s)",
-                                zone.Name, zone.ZoneType, temperature, targetTemperature))
+                                name, zone.ZoneType, temperature, targetTemperature))
                     } else {
                         output = append(output, fmt.Sprintf("%s|%s|%s",
-                                zone.Name, zone.ZoneType, temperature))
+                                name, zone.ZoneType, temperature))
                     }
                 }
                 fmt.Println(columnize.SimpleFormat(output))
