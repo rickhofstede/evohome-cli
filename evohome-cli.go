@@ -18,6 +18,12 @@ func main() {
     authShell.Print("Username: ")
     username := authShell.ReadLine()
 
+    if username == "" {
+        fmt.Println("Exiting...")
+        os.Exit(0)
+        return
+    }
+
     authShell.Print("Password: ")
     password := authShell.ReadPassword()
     authShell.Close()
