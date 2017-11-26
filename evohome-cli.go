@@ -20,7 +20,7 @@ func main() {
 
     if *helpArg {
         flag.PrintDefaults()
-        os.Exit(0)
+        os.Exit(1)
     }
 
     // Show authentication shell
@@ -37,8 +37,7 @@ func main() {
 
     if username == "" {
         fmt.Println("Exiting...")
-        os.Exit(0)
-        return
+        os.Exit(1)
     }
 
     var password string
@@ -56,8 +55,7 @@ func main() {
     if client == nil || !client.Initialized() {
         fmt.Println("\nConnection/authentication error")
         fmt.Println("Exiting...")
-        os.Exit(0)
-        return
+        os.Exit(1)
     }
 
     // Show main shell
