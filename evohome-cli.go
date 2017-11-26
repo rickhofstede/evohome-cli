@@ -2,6 +2,7 @@ package main
 
 import (
     "evohome"
+    "flag"
     "fmt"
     "os"
     "github.com/abiosoft/ishell"
@@ -11,12 +12,28 @@ import (
 var client *evohome.Evohome
 
 func main() {
+    // Command-line arguments
+    helpArg := flag.Bool("help", false, "Display help text")
+    usernameArg := flag.String("username", "", "Username for authenticating to Honeywell's Evohome service")
+    passwordArg := flag.String("password", "", "password for authenticating to Honeywell's Evohome service")
+    flag.Parse()
+
+    if *helpArg {
+        flag.PrintDefaults()
+        os.Exit(0)
+    }
+
     // Show authentication shell
     authShell := ishell.New()
     authShell.Println("Evohome CLI\n")
 
-    authShell.Print("Username: ")
-    username := authShell.ReadLine()
+    var username string
+    if *usernameArg == "" {
+        authShell.Print("Username: ")
+        username = authShell.ReadLine()
+    } else {
+        username = *usernameArg
+    }
 
     if username == "" {
         fmt.Println("Exiting...")
@@ -24,8 +41,14 @@ func main() {
         return
     }
 
-    authShell.Print("Password: ")
-    password := authShell.ReadPassword()
+    var password string
+    if *passwordArg == "" {
+        authShell.Print("Password: ")
+        password = authShell.ReadPassword()
+    } else {
+        password = *passwordArg
+    }
+
     authShell.Close()
 
     // Connect to Evohome
